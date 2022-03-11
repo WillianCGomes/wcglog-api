@@ -6,6 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,10 +27,18 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Banco de dados controla a estrategia
 	private Long id;
 
-	
+	//Validacoes exigem o @Valid no CRUD
+	@NotBlank
+	@Size(max = 60)
 	private String nome;
+	
+	@NotBlank
+	@Email
+	@Size(max = 255)
 	private String email;
 
+	@NotBlank
+	@Size(max = 20)
 	@Column(name = "fone") // Especifica o nome da coluna no banco de dados
 	private String telefone;
 

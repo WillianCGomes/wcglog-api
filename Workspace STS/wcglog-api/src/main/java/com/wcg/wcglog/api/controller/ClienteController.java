@@ -2,6 +2,8 @@ package com.wcg.wcglog.api.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,14 +59,14 @@ public class ClienteController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	// Anotacao RequestBody para transformar o JSON em um objeto Java
-	public Cliente adicionar(@RequestBody Cliente cliente) {
+	public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
 		return clienteRepository.save(cliente);
 	}
 
 	// Metodo responsavel por atualizar um cliente existente atraves da requisicao put
 
 	@PutMapping("/{clienteId}")
-	public ResponseEntity<Cliente> atualizar(@PathVariable Long clienteId,
+	public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteId,
 		@RequestBody Cliente cliente) {
 		if (!clienteRepository.existsById(clienteId)) {
 			return ResponseEntity.notFound().build();
