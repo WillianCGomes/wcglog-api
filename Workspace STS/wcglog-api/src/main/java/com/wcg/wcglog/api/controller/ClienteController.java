@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wcg.wcglog.domain.model.Cliente;
 import com.wcg.wcglog.domain.repository.ClienteRepository;
+import com.wcg.wcglog.domain.service.CatalogoClienteService;
 
 import lombok.AllArgsConstructor;
 
@@ -29,6 +30,7 @@ public class ClienteController {
 
 	@Autowired // Anotacao que define uma instancia gerenciada pelo Spring
 	private ClienteRepository clienteRepository;
+	private CatalogoClienteService catalogoClienteService;
 
 	// Metodo responsavel por listar todos os clientes com a requisicao get
 	@GetMapping
@@ -60,7 +62,7 @@ public class ClienteController {
 	@ResponseStatus(HttpStatus.CREATED)
 	// Anotacao RequestBody para transformar o JSON em um objeto Java
 	public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
-		return clienteRepository.save(cliente);
+		return catalogoClienteService.salvar(cliente);
 	}
 
 	// Metodo responsavel por atualizar um cliente existente atraves da requisicao put
@@ -72,7 +74,8 @@ public class ClienteController {
 			return ResponseEntity.notFound().build();
 		}
 		cliente.setId(clienteId); //forcando a atualizacao para nao acabar criando um novo cliente
-		cliente = clienteRepository.save(cliente);
+		cliente = catalogoClienteService.salvar(cliente);
+	
 		return ResponseEntity.ok(cliente);
 	}
 	
@@ -82,7 +85,7 @@ public class ClienteController {
 		if (!clienteRepository.existsById(clienteId)) {
 			return ResponseEntity.notFound().build();
 		}
-		clienteRepository.deleteById(clienteId);
+		catalogoClienteService.excluir(clienteId);
 		
 		return ResponseEntity.noContent().build();
 	}
