@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -27,8 +26,8 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Banco de dados controla a estrategia
 	private Long id;
 
-	//Validacoes exigem o @Valid no CRUD
-	@NotBlank
+	//Validacoes exigem o @Valid no POST e PUT
+	@NotBlank   
 	@Size(max = 60)
 	private String nome;
 	
@@ -42,4 +41,7 @@ public class Cliente {
 	@Column(name = "fone") // Especifica o nome da coluna no banco de dados
 	private String telefone;
 
+	
+	
+	
 }
