@@ -59,5 +59,4 @@ public class Entrega {
 	@JsonProperty(access = Access.READ_ONLY)
 	private OffsetDateTime dataFinalizacao;
 	
-	
 }
