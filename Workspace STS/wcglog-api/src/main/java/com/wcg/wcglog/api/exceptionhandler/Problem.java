@@ -1,6 +1,6 @@
 package com.wcg.wcglog.api.exceptionhandler;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -17,7 +17,7 @@ public class Problem {
 
 	
 	private Integer status;
-	private LocalDateTime dataHora;
+	private OffsetDateTime dataHora;
 	private String titulo;
 	private List<Campo> campos;
 	

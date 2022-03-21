@@ -1,15 +1,13 @@
 package com.wcg.wcglog.domain.service;
 
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.wcg.wcglog.domain.exception.NegocioException;
 import com.wcg.wcglog.domain.model.Cliente;
 import com.wcg.wcglog.domain.model.Entrega;
 import com.wcg.wcglog.domain.model.StatusEntrega;
-import com.wcg.wcglog.domain.repository.ClienteRepository;
 import com.wcg.wcglog.domain.repository.EntregaRepository;
 
 import lombok.AllArgsConstructor;
@@ -27,7 +25,7 @@ public class SolicitacaoEntregaService {
 
 		entrega.setCliente(cliente);
 		entrega.setStatus(StatusEntrega.PENDENTE);
-		entrega.setDataPedido(LocalDateTime.now());
+		entrega.setDataPedido(OffsetDateTime.now());
 
 		return entregaRepository.save(entrega);
 	}

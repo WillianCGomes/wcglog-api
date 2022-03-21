@@ -8,7 +8,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
+
+import com.wcg.wcglog.domain.ValidationGroups;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -21,6 +25,7 @@ import lombok.Setter;
 @Table(name = "cliente") // Nome da tabela no banco de dados
 public class Cliente {
 
+	@NotNull(groups=ValidationGroups.ClienteId.class)
 	@EqualsAndHashCode.Include // EqualsAndHashCode apenas para id
 	@Id // Chave Primaria
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Banco de dados controla a estrategia
