@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wcg.wcglog.api.assembler.EntregaAssembler;
 import com.wcg.wcglog.api.model.EntregaModel;
+import com.wcg.wcglog.api.model.input.EntregaInput;
 import com.wcg.wcglog.domain.model.Entrega;
 import com.wcg.wcglog.domain.repository.EntregaRepository;
 import com.wcg.wcglog.domain.service.SolicitacaoEntregaService;
@@ -33,8 +34,10 @@ public class EntregaController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public EntregaModel solicitar(@Valid @RequestBody Entrega entrega) {
-		return entregaAssembler.toModel(solicitacaoEntregaService.solicitar(entrega));
+	public EntregaModel solicitar(@Valid @RequestBody EntregaInput entregaInput) {
+		Entrega novaEntrega = entregaAssembler.toEntity(entregaInput);
+		Entrega entregaSolicitada = solicitacaoEntregaService.solicitar(novaEntrega);
+		return entregaAssembler.toModel(entregaSolicitada);
 	}
 
 	@GetMapping

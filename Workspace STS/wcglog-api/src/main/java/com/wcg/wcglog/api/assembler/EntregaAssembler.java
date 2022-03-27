@@ -7,6 +7,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import com.wcg.wcglog.api.model.EntregaModel;
+import com.wcg.wcglog.api.model.input.EntregaInput;
 import com.wcg.wcglog.domain.model.Entrega;
 
 import lombok.AllArgsConstructor;
@@ -24,5 +25,9 @@ public class EntregaAssembler {
 	public List<EntregaModel> toCollectionModel(List<Entrega> entregas)
 	{
 		return entregas.stream().map(this::toModel).collect(Collectors.toList());
+	}
+	
+	public Entrega toEntity(EntregaInput entregaInput) {
+		return modelMapper.map(entregaInput, Entrega.class);
 	}
 } 
