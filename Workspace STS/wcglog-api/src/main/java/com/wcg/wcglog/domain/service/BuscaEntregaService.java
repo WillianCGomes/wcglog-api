@@ -2,7 +2,7 @@ package com.wcg.wcglog.domain.service;
 
 import org.springframework.stereotype.Service;
 
-import com.wcg.wcglog.domain.exception.NegocioException;
+import com.wcg.wcglog.domain.exception.EntidadeNaoEncontradaException;
 import com.wcg.wcglog.domain.model.Entrega;
 import com.wcg.wcglog.domain.repository.EntregaRepository;
 
@@ -16,6 +16,6 @@ public class BuscaEntregaService {
 	
 	public Entrega buscar(Long entregaId) {
 		return entregaRepository.findById(entregaId)
-				.orElseThrow(() -> new NegocioException("Entrega não encontrada"));
+				.orElseThrow(() -> new EntidadeNaoEncontradaException("Entrega não encontrada"));
 	}
 }
