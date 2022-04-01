@@ -23,6 +23,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.wcg.wcglog.domain.ValidationGroups;
+import com.wcg.wcglog.domain.exception.NegocioException;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -67,6 +68,19 @@ public class Entrega {
 
 		return ocorrencia;
 
+	}
+
+	public void finalizar() {
+		if (podeSerFinalizada()) {
+			setStatus(StatusEntrega.FINALIZADA);
+			setDataFinalizacao(OffsetDateTime.now());
+		} else {
+			throw new NegocioException("A entrega não pode ser finalizada");
+		}
+	}
+
+	public boolean podeSerFinalizada() {
+		return StatusEntrega.PENDENTE.equals(getStatus());
 	}
 
 }
